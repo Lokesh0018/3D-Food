@@ -12,24 +12,28 @@ const dishes = [
     name: "Roasted Chicken",
     description: "Tender, juicy roasted chicken served with creamy, buttery mashed potatoes. A classic comfort meal done right.",
     image: "/roasted_chicken_with_mashed_potatoes-removebg-preview.png",
+    price: "$14.99"
   },
   {
     id: 2,
     name: "Spicy Drumsticks",
     description: "Fiery chili and earthy cumin marinated drumsticks, grilled to smoky perfection for an unforgettable kick.",
     image: "/Chili___Cumin_Marinated_Chicken_Drumsticks-removebg-preview.png",
+    price: "$12.49"
   },
   {
     id: 3,
     name: "Classic Grilled",
     description: "Perfectly charred and succulent grilled chicken, lightly seasoned to let the natural flavors shine.",
     image: "/grilled_chicken-removebg-preview.png",
+    price: "$13.99"
   },
   {
     id: 4,
     name: "Fries & Nuggets",
     description: "Golden, crispy french fries paired with our signature crispy chicken nuggets. The ultimate crowd-pleaser.",
     image: "/french_fries_with_nuggets-removebg-preview.png",
+    price: "$9.99"
   }
 ];
 
@@ -161,6 +165,22 @@ function App() {
         ease: "back.out(1.7)"
       }
     );
+
+    // 5. Parallax Ingredients
+    gsap.utils.toArray('.parallax-item').forEach(item => {
+      const speed = parseFloat(item.dataset.speed);
+      gsap.to(item, {
+        y: () => (ScrollTrigger.maxScroll(window) * speed),
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5,
+          invalidateOnRefresh: true
+        }
+      });
+    });
   }, []);
 
   const handleSelect = (index) => {
@@ -206,6 +226,17 @@ function App() {
 
   return (
     <>
+      {/* Floating Parallax Ingredients */}
+      <div className="parallax-wrapper">
+        <img src="/red-chilli-removebg-preview.png" className="parallax-item p-chili-1" data-speed="0.2" alt="" />
+        <img src="/basil-removebg-preview.png" className="parallax-item p-basil-1" data-speed="-0.15" alt="" />
+        <img src="/garlic-removebg-preview.png" className="parallax-item p-garlic-1" data-speed="0.1" alt="" />
+        <img src="/sauce_splash-removebg-preview.png" className="parallax-item p-splash-1" data-speed="-0.05" alt="" />
+        <img src="/flame particles.png" className="parallax-item p-flame-1" data-speed="0.3" alt="" />
+        <img src="/basil-removebg-preview.png" className="parallax-item p-basil-2" data-speed="0.25" alt="" />
+        <img src="/red-chilli-removebg-preview.png" className="parallax-item p-chili-2" data-speed="-0.2" alt="" />
+      </div>
+
       {/* Hero Section */}
       <div className="hero-container">
         <nav className={isScrolled ? "scrolled" : ""}>
@@ -230,6 +261,11 @@ function App() {
             </div>
             <p className="dish-desc">{dishes[activeIndex].description}</p>
             
+            <div className="hero-cta">
+              <button className="order-btn">Order Now</button>
+              <button className="btn-secondary">View Menu</button>
+            </div>
+            
             <div className="thumbnails-row">
               {dishes.map((dish, idx) => (
                 <div 
@@ -238,9 +274,14 @@ function App() {
                   onClick={() => handleSelect(idx)}
                 >
                   <img src={dish.image} alt={dish.name} className="thumbnail-img" />
-                  {idx === activeIndex && <div className="active-indicator"></div>}
                 </div>
               ))}
+              
+              {/* Sliding Active Indicator */}
+              <div 
+                className="active-indicator" 
+                style={{ transform: `translateX(calc(${activeIndex} * (80px + 2rem)))` }}
+              ></div>
             </div>
           </div>
 
@@ -259,16 +300,24 @@ function App() {
 
       {/* 1. Menu Section */}
       <section className="section menu-section" ref={menuRef}>
-        <h2 className="section-title">Explore Our Menu</h2>
-        <div className="menu-grid">
+        <div className="section-header text-center">
+          <h2 className="section-title">Popular Menu</h2>
+          <p className="section-subtitle">Swipe to explore our signature dishes</p>
+        </div>
+        <div className="menu-carousel">
           {dishes.map((dish) => (
              <div className="menu-card" key={dish.id + 'menu'}>
                <div className="menu-img-wrap">
                  <img src={dish.image} alt={dish.name} className="menu-img"/>
                </div>
-               <h4>{dish.name}</h4>
-               <p className="price">$12.99</p>
-               <button className="order-btn">Order Now</button>
+               <div className="menu-info">
+                 <h4>{dish.name}</h4>
+                 <p className="menu-desc">{dish.description}</p>
+                 <div className="menu-bottom">
+                   <span className="price">{dish.price}</span>
+                   <button className="add-cart-btn">+</button>
+                 </div>
+               </div>
              </div>
           ))}
         </div>
