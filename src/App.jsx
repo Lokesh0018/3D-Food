@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Flame, Smartphone, ChefHat, Truck, Star, User, Quote } from 'lucide-react';
+import { Flame, Smartphone, ChefHat, Truck, Star, User, Quote, MapPin, Phone, Mail } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './index.css';
@@ -364,8 +364,57 @@ function App() {
         </div>
       </section>
       
-      <footer>
-        <p>&copy; 2026 Logo Foods. All rights reserved.</p>
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <div className="logo-circle footer-logo">
+               <Flame size={24} color="white" fill="white" className="flame-icon" />
+            </div>
+            <h3>Flavor Grill</h3>
+            <p>Crafting perfect bites since 2010. Experience the true taste of flame-grilled perfection.</p>
+            <div className="social-links">
+              <a href="#" aria-label="Instagram"><span style={{fontWeight: 800, fontSize: '14px'}}>IG</span></a>
+              <a href="#" aria-label="Facebook"><span style={{fontWeight: 800, fontSize: '14px'}}>FB</span></a>
+              <a href="#" aria-label="X (Twitter)"><span style={{fontWeight: 800, fontSize: '14px'}}>X</span></a>
+            </div>
+          </div>
+          
+          <div className="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#menu">Our Menu</a></li>
+              <li><a href="#how-it-works">How it Works</a></li>
+              <li><a href="#story">Our Story</a></li>
+            </ul>
+          </div>
+          
+          <div className="footer-contact">
+            <h4>Contact Us</h4>
+            <ul>
+              <li><MapPin size={18}/> 123 Grill Street, Food City</li>
+              <li><Phone size={18}/> (555) 123-4567</li>
+              <li><Mail size={18}/> hello@flavorgrill.com</li>
+            </ul>
+          </div>
+          
+          <div className="footer-newsletter">
+            <h4>Newsletter</h4>
+            <p>Subscribe for exclusive offers and updates.</p>
+            <div className="subscribe-form">
+              <input type="email" placeholder="Enter your email" />
+              <button>Subscribe</button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Flavor Grill. All Rights Reserved.</p>
+          <div className="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
       </footer>
     </>
   );
