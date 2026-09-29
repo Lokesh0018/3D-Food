@@ -9,11 +9,11 @@
 body {
   font-family: 'Inter', sans-serif;
   background-color: #d1d5d8;
-  overflow: hidden;
+  overflow-x: hidden;
   color: #111;
 }
 
-.container {
+.hero-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -56,7 +56,13 @@ nav {
   opacity: 0.7;
 }
 
-main {
+.nav-links li.active {
+  color: #ef4444;
+  border-bottom: 2px solid #ef4444;
+  padding-bottom: 4px;
+}
+
+.hero-main {
   display: flex;
   flex: 1;
   align-items: center;
@@ -82,11 +88,12 @@ main {
 }
 
 .dish-title {
-  font-size: 5rem;
+  font-size: 4.5rem;
   font-weight: 900;
   color: #000;
   letter-spacing: -2px;
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .dish-desc {
@@ -161,4 +168,248 @@ main {
   object-fit: contain;
   filter: drop-shadow(15px 30px 40px rgba(0,0,0,0.4));
   transform-origin: center center;
+}
+
+/* --- NEW SECTIONS CSS --- */
+
+.section {
+  padding: 6rem 5rem;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  color: #000;
+  letter-spacing: -1px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 1. Menu Grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+}
+
+.menu-card {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 50px rgba(0,0,0,0.1);
+}
+
+.menu-img-wrap {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem;
+}
+
+.menu-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover .menu-img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.menu-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.menu-card .price {
+  font-size: 1.1rem;
+  color: #ef4444;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.order-btn {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.order-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* 2. Steps Section */
+.steps-section {
+  background: #fff;
+}
+
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.step-card {
+  position: relative;
+  background: #f8f9fa;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+}
+
+.step-bg-number {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 10rem;
+  font-weight: 900;
+  color: #ef4444;
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.step-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background: #ef4444;
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+}
+
+.step-card h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.step-card p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* 3. Story Section */
+.story-section {
+  background: #c3c7ca;
+}
+
+.story-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.story-text {
+  flex: 1;
+}
+
+.story-desc {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.story-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.story-placeholder {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+}
+
+/* 4. Reviews Section */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.review-card {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.stars {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.review-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.review-card h5 {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #111;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #111;
+  color: #888;
+  font-size: 0.9rem;
 }
