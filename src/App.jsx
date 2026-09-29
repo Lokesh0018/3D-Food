@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Flame, Smartphone, ChefHat, Truck } from 'lucide-react';
+import { Flame, Smartphone, ChefHat, Truck, Star, User, Quote } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './index.css';
@@ -309,9 +309,20 @@ function App() {
       <section className="section story-section" ref={storyRef}>
         <div className="story-content">
            <div className="story-text">
-             <h2 className="section-title">Our Story</h2>
+             <span className="section-badge">Our Heritage</span>
+             <h2 className="section-title">Crafting Perfect Bites Since 2010</h2>
              <p className="story-desc">We believe in the power of good food to bring people together. Using only farm-fresh ingredients and our secret blend of spices, every dish is crafted to perfection over an open flame.</p>
-             <button className="order-btn">Learn More</button>
+             <div className="story-stats">
+               <div className="stat">
+                 <span className="stat-num">15+</span>
+                 <span className="stat-label">Years of Mastery</span>
+               </div>
+               <div className="stat">
+                 <span className="stat-num">100%</span>
+                 <span className="stat-label">Fresh Ingredients</span>
+               </div>
+             </div>
+             <button className="order-btn mt-4">Discover More</button>
            </div>
            <div className="story-image">
               <div className="story-img-wrapper">
@@ -323,13 +334,31 @@ function App() {
 
       {/* 4. Reviews */}
       <section className="section reviews-section" ref={reviewsRef}>
-        <h2 className="section-title text-center">What People Say</h2>
+        <div className="reviews-header">
+           <span className="section-badge center">Testimonials</span>
+           <h2 className="section-title text-center">What People Say</h2>
+        </div>
         <div className="reviews-grid">
-           {[1,2,3].map(i => (
+           {[
+             { name: "Lokesh M", role: "Food Enthusiast", text: "Absolutely the best chicken I have ever tasted. The flavors are out of this world! I bring my family here every weekend." },
+             { name: "Sarah N", role: "Local Guide", text: "The grilled textures and spices are perfectly balanced. Their delivery is fast and the food always arrives piping hot." },
+             { name: "James K", role: "Regular Customer", text: "I've tried every burger joint in town, but nothing beats the smoky flavor they manage to achieve here. Highly recommended!" }
+           ].map((review, i) => (
              <div className="review-card" key={i}>
-                <div className="stars">⭐⭐⭐⭐⭐</div>
-                <p>"Absolutely the best chicken I have ever tasted. The flavors are out of this world!"</p>
-                <h5>- Happy Customer {i}</h5>
+                <Quote className="quote-icon" size={48} />
+                <div className="stars">
+                  {[1,2,3,4,5].map(s => <Star key={s} size={18} fill="#f59e0b" color="#f59e0b" />)}
+                </div>
+                <p className="review-text">"{review.text}"</p>
+                <div className="reviewer">
+                  <div className="reviewer-avatar">
+                     <User size={20} color="#fff" />
+                  </div>
+                  <div className="reviewer-info">
+                     <h5>{review.name}</h5>
+                     <span>{review.role}</span>
+                  </div>
+                </div>
              </div>
            ))}
         </div>
