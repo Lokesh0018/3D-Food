@@ -665,6 +665,12 @@ function App() {
 
       {/* 5. Contact Section */}
       <section id="contact" className="section contact-section" ref={contactRef}>
+        <div className="contact-parallax-wrapper">
+          <img src="/red-chilli-removebg-preview.png" className="parallax-item cp-chili-1" data-speed="0.15" alt="" />
+          <img src="/basil-removebg-preview.png" className="parallax-item cp-basil-1" data-speed="-0.1" alt="" />
+          <img src="/garlic-removebg-preview.png" className="parallax-item cp-garlic-1" data-speed="0.12" alt="" />
+          <img src="/sauce_splash-removebg-preview.png" className="parallax-item cp-splash-1" data-speed="-0.05" alt="" />
+        </div>
         <div className="section-header text-center">
           <h2 className="section-title">Get in Touch</h2>
           <p className="section-subtitle">We'd love to hear from you. Drop us a line!</p>

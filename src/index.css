@@ -1874,3 +1874,194 @@ nav.scrolled {
     display: none !important;
   }
 }
+/* =========================================
+   GLOBAL MOBILE RESPONSIVENESS (PRO MAX)
+   ========================================= */
+
+@media (max-width: 900px) {
+  /* Contact Section Fixes */
+  .contact-container {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+    padding: 0 1rem !important;
+  }
+  
+  .contact-form-container {
+    padding: 2rem 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* General Spacing */
+  section, .section {
+    padding: 4rem 1.5rem !important;
+  }
+
+  /* Typography */
+  h1 { font-size: 3rem !important; }
+  h2, .section-title { font-size: 2.2rem !important; }
+  .section-subtitle { font-size: 1rem !important; }
+
+  /* Hero Section */
+  .hero-container {
+    flex-direction: column !important;
+    padding: 6rem 1.5rem 3rem !important;
+    text-align: center;
+  }
+  
+  .hero-content {
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+
+  /* Story Section */
+  .story-container {
+    flex-direction: column !important;
+    gap: 3rem !important;
+    padding: 0 1.5rem !important;
+  }
+
+  /* Menu Section */
+  .menu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .dish-card {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  /* Cart Sidebar */
+  .cart-sidebar {
+    width: 100% !important;
+    right: -100% !important;
+  }
+  .cart-sidebar.open {
+    right: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.8rem !important;
+  }
+  
+  .nav-center-title .nav-animated-title {
+    font-size: 1rem !important;
+  }
+}
+
+/* =========================================
+   CONTACT SECTION PARALLAX ADDONS
+   ========================================= */
+
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-parallax-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Position the items around the contact section edges */
+.cp-chili-1 {
+  width: 120px;
+  top: 15%;
+  left: 5%;
+  transform: rotate(25deg);
+  opacity: 0.7;
+}
+
+.cp-basil-1 {
+  width: 100px;
+  bottom: 20%;
+  right: 5%;
+  transform: rotate(-15deg);
+  opacity: 0.8;
+}
+
+.cp-garlic-1 {
+  width: 90px;
+  top: 25%;
+  right: 10%;
+  transform: rotate(45deg);
+  opacity: 0.6;
+}
+
+.cp-splash-1 {
+  width: 250px;
+  bottom: 10%;
+  left: -5%;
+  transform: rotate(-10deg);
+  opacity: 0.5;
+}
+
+/* Ensure contact content stays above the parallax items */
+.contact-container, .section-header {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add blur to the chili for depth of field */
+.cp-chili-1 {
+  filter: blur(4px) !important;
+}
+
+/* =========================================
+   CONTACT SECTION PARALLAX ADDONS - REFINED
+   ========================================= */
+
+.cp-chili-1 {
+  width: 140px !important;
+  top: 10% !important;
+  left: -2% !important;
+  transform: rotate(45deg) !important;
+  opacity: 0.4 !important;
+  filter: blur(2px) !important;
+}
+
+.cp-basil-1 {
+  width: 120px !important;
+  bottom: 5% !important;
+  left: 15% !important;
+  transform: rotate(-30deg) !important;
+  opacity: 0.3 !important;
+  filter: blur(1px) !important;
+}
+
+.cp-garlic-1 {
+  width: 110px !important;
+  top: 15% !important;
+  right: -2% !important;
+  transform: rotate(-45deg) !important;
+  opacity: 0.25 !important;
+  filter: blur(3px) !important;
+}
+
+.cp-splash-1 {
+  width: 300px !important;
+  bottom: -5% !important;
+  right: -5% !important;
+  transform: rotate(15deg) !important;
+  opacity: 0.15 !important;
+  filter: blur(0px) !important;
+}
+
+/* Ensure addons don't break scroll width */
+.contact-parallax-wrapper {
+  overflow: hidden !important;
+}
