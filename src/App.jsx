@@ -37,6 +37,7 @@ function App() {
   // Hero Section State
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const largeImageRef = useRef(null);
   const titleRef = useRef(null);
 
@@ -57,8 +58,27 @@ function App() {
     return () => clearInterval(timer);
   }, [activeIndex, isAnimating]);
 
+  // Scroll State for Navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // ScrollTrigger Animations
   useEffect(() => {
+    // 0. Hero Initial Load Animation
+    const tl = gsap.timeline();
+    tl.fromTo("nav", { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
+      .fromTo(".left-content > *", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+      .fromTo(largeImageRef.current, { scale: 0.5, rotation: 90, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: "back.out(1.5)" }, "-=0.6");
+
     // 1. Menu cards stagger
     gsap.fromTo(".menu-card", 
       { y: 60, opacity: 0 },
@@ -66,6 +86,7 @@ function App() {
         scrollTrigger: {
           trigger: menuRef.current,
           start: "top 80%",
+          toggleActions: "play reverse play reverse",
         },
         y: 0, 
         opacity: 1, 
@@ -82,6 +103,7 @@ function App() {
         scrollTrigger: {
           trigger: stepsRef.current,
           start: "top 75%",
+          toggleActions: "play reverse play reverse",
         },
         y: 0,
         opacity: 1,
@@ -98,6 +120,7 @@ function App() {
         scrollTrigger: {
           trigger: storyRef.current,
           start: "top 75%",
+          toggleActions: "play reverse play reverse",
         },
         x: 0,
         opacity: 1,
@@ -111,6 +134,7 @@ function App() {
         scrollTrigger: {
           trigger: storyRef.current,
           start: "top 75%",
+          toggleActions: "play reverse play reverse",
         },
         x: 0,
         opacity: 1,
@@ -127,6 +151,7 @@ function App() {
         scrollTrigger: {
           trigger: reviewsRef.current,
           start: "top 85%",
+          toggleActions: "play reverse play reverse",
         },
         y: 0,
         opacity: 1,
@@ -183,10 +208,10 @@ function App() {
     <>
       {/* Hero Section */}
       <div className="hero-container">
-        <nav>
+        <nav className={isScrolled ? "scrolled" : ""}>
           <div className="logo">
             <div className="logo-circle">
-               <Flame size={32} color="white" fill="white" />
+               <Flame size={32} color="white" fill="white" className="flame-icon" />
             </div>
           </div>
           <ul className="nav-links">
@@ -289,8 +314,8 @@ function App() {
              <button className="order-btn">Learn More</button>
            </div>
            <div className="story-image">
-              <div className="story-placeholder">
-                <img src={dishes[2].image} alt="Cooking" className="story-img" />
+              <div className="story-img-wrapper">
+                <img src="/story-image.jpg" alt="Grilling Chicken" className="story-img" />
               </div>
            </div>
         </div>
