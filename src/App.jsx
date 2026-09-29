@@ -34,6 +34,27 @@ const dishes = [
     description: "Golden, crispy french fries paired with our signature crispy chicken nuggets. The ultimate crowd-pleaser.",
     image: "/french_fries_with_nuggets-removebg-preview.png",
     price: "$9.99"
+  },
+  {
+    id: 5,
+    name: "Grilled Beef Steak",
+    description: "Premium cut beef steak grilled to absolute perfection, rich in flavor and served with our signature house sauce.",
+    image: "/grilled_beef_steak-removebg-preview.png",
+    price: "$24.99"
+  },
+  {
+    id: 6,
+    name: "Veggie Lasagna",
+    description: "Layers of fresh pasta packed with roasted vegetables, creamy ricotta, and our homemade zesty marinara.",
+    image: "/lasang_with_fresh_vegies-removebg-preview.png",
+    price: "$16.50"
+  },
+  {
+    id: 7,
+    name: "Savory Meat Pie",
+    description: "Flaky golden pastry filled with slow-cooked savory meats and rich gravy. A hearty, satisfying bite.",
+    image: "/savory_meat_pie-removebg-preview.png",
+    price: "$11.99"
   }
 ];
 
@@ -51,11 +72,39 @@ function App() {
   const storyRef = useRef(null);
   const reviewsRef = useRef(null);
 
-  // Hero Auto Rotation
+  // Carousel Drag State
+  const carouselRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - carouselRef.current.offsetLeft);
+    setScrollLeft(carouselRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    carouselRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  // Hero Auto Rotation (only over first 4 items)
   useEffect(() => {
     const timer = setInterval(() => {
       if (!isAnimating) {
-        handleSelect((activeIndex + 1) % dishes.length);
+        handleSelect((activeIndex + 1) % 4);
       }
     }, 4000);
 
@@ -267,7 +316,7 @@ function App() {
             </div>
             
             <div className="thumbnails-row">
-              {dishes.map((dish, idx) => (
+              {dishes.slice(0, 4).map((dish, idx) => (
                 <div 
                   key={dish.id} 
                   className={`thumbnail-container ${idx === activeIndex ? 'active' : ''}`}
@@ -304,7 +353,14 @@ function App() {
           <h2 className="section-title">Popular Menu</h2>
           <p className="section-subtitle">Swipe to explore our signature dishes</p>
         </div>
-        <div className="menu-carousel">
+        <div 
+          className={`menu-carousel ${isDragging ? 'active-drag' : ''}`}
+          ref={carouselRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
           {dishes.map((dish) => (
              <div className="menu-card" key={dish.id + 'menu'}>
                <div className="menu-img-wrap">
